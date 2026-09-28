@@ -3,7 +3,8 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "ServiceBusConnection": "Endpoint=sb://sb-rzeka-reports-mrz1.servicebus.windows.net/;SharedAccessKeyName=functions-app;SharedAccessKey=wnpznLqiMlF5yf3C7gZ0PB+nYTu5V2J2X+ASbBvTbdg="
+    "ServiceBusConnection": "Endpoint=sb://sb-rzeka-reports-mrz1.servicebus.windows.net/;SharedAccessKeyName=functions-app;SharedAccessKey=wnpznLqiMlF5yf3C7gZ0PB+nYTu5V2J2X+ASbBvTbdg=",
+    "SqlConnection": "Server=tcp:sql-rzeka-reports-mrz1.database.windows.net,1433;Database=crashreports;User ID=rzekaadmin;Password=bDUXwOmcIupsA91rFfrkq8JvPHxioLTt;Encrypt=True;Connection Timeout=60;"
   },
   "ConnectionStrings": {},
   "Host": {}
