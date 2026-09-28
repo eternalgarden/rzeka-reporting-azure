@@ -1,0 +1,16 @@
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.vscode/
+TestResults/
+
+# 🔥 Azure Functions: holds secrets aka. connection strings, never commit. 
+See local.settings.sample.json.
+
+# Azurite local storage emulator data
+__azurite_db*
+__blobstorage__/
+__queuestorage__/
+AzuriteConfig

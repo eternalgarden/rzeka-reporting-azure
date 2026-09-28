@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "ServiceBusConnection": "<Service Bus namespace connection string from the Azure portal>",
+    "SqlConnection": "<Azure SQL connection string, see progress.md>"
+  }
+}
