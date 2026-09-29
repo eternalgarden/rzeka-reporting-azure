@@ -1,4 +1,4 @@
-# rzeka-reporting
+# rzeka-reporting-azure
 
 An Azure backend that collects crash reports from games built with
 [rzeka](https://github.com/eternalgarden/rzeka), a reactive event bus for C# that tracks
@@ -118,7 +118,7 @@ logic (against SQLite in memory).
 cp src/RzekaReporting.Functions/local.settings.sample.json src/RzekaReporting.Functions/local.settings.json
 # fill in ServiceBusConnection and SqlConnection
 
-SQL_CONNECTION="<sql connection string>" dotnet ef database update --project src/RzekaReporting.Functions
+SqlConnection="<sql connection string>" dotnet ef database update --project src/RzekaReporting.Functions
 
 azurite --silent --location ~/.azurite &
 cd src/RzekaReporting.Functions && func start

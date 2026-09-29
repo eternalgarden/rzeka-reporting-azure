@@ -1,3 +1,4 @@
+using RzekaReporting.Functions.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace RzekaReporting.Functions.Database;
@@ -9,6 +10,8 @@ public sealed class ReportsDbContext(DbContextOptions<ReportsDbContext> options)
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Only what EF Core's conventions can't infer: keys, text lengths and the link between
+        // the tables. Every other property becomes a column by convention.
         modelBuilder.Entity<Issue>(issue =>
         {
             issue.HasKey(i => i.Fingerprint);

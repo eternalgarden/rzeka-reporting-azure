@@ -1,4 +1,4 @@
-namespace RzekaReporting.Functions.Database;
+namespace RzekaReporting.Functions.Database.Entities;
 
 // One row per report. Times are UTC.
 public sealed class CrashReport

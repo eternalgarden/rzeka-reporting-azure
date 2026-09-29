@@ -15,11 +15,8 @@ public sealed class IngestFunction(ILogger<IngestFunction> logger)
         if (request.ContentLength > EnvelopeValidator.MaxBodyBytes)
             return IngestResult.Reject(StatusCodes.Status413PayloadTooLarge, "Report too large.");
 
-        // ContentLength is absent for chunked uploads, so the read is capped as well.
-        // TODO why do we add 1
         byte[] body = await ReadCappedAsync(request.Body, EnvelopeValidator.MaxBodyBytes + 1);
 
-        // TODO what could make body fail the envelope validator?
         EnvelopeResult envelope = EnvelopeValidator.Validate(body);
         if (!envelope.IsValid)
         {
@@ -27,7 +24,6 @@ public sealed class IngestFunction(ILogger<IngestFunction> logger)
             return IngestResult.Reject(StatusCodes.Status400BadRequest, envelope.Error!);
         }
 
-        // TODO add the check if logging is disabled to avoid potentially expensive action?
         logger.LogInformation("Accepted report {ReportId}", envelope.ReportId);
         return new IngestResult
         {
@@ -45,19 +41,4 @@ public sealed class IngestFunction(ILogger<IngestFunction> logger)
             total += read;
         return buffer[..total];
     }
-}
-
-public sealed class IngestResult
-{
-    // TODO so here we state our target service bus queue?
-    // TODO what are the other allowed Connection types?
-    [ServiceBusOutput("crash-reports", Connection = "ServiceBusConnection")]
-    public string? QueueMessage { get; init; }
-
-    [HttpResult]
-    public required IActionResult HttpResponse { get; init; }
-
-    // ObjectResult implements IActionResult
-    public static IngestResult Reject(int statusCode, string error) =>
-        new() { HttpResponse = new ObjectResult(new { error }) { StatusCode = statusCode } };
 }

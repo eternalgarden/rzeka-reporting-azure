@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RzekaReporting.Functions.Database.Entities;
 
 namespace RzekaReporting.Functions.Database;
 
@@ -41,6 +42,7 @@ public sealed class ReportStore(ReportsDbContext db)
                 cancellationToken
             );
 
+        // First Issue
         if (updated == 0)
             db.Issues.Add(
                 new Issue
