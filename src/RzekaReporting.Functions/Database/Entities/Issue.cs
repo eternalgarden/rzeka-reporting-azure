@@ -1,4 +1,4 @@
-namespace RzekaReporting.Functions.Database;
+namespace RzekaReporting.Functions.Database.Entities;
 
 // One row per bug: all reports with the same fingerprint.
 public sealed class Issue

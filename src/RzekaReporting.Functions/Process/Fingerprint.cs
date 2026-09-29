@@ -5,17 +5,6 @@ using Microsoft.Azure.Functions.Worker.Extensions.Abstractions;
 
 namespace RzekaReporting.Functions.Process;
 
-/*
- * Personal notes. TODO move to notes not a code comment
- * Group reports into issues: same fingerprint = same bug.
- * Fingerprint does not have to be easily readable for a human.
- * Yes i wrote those regex spells myself, am i insane? But regex is fun and i love regex101.com
- *
- * partial is required because [GeneratedRegex] uses a source generator, it runs during compilation
- * and generates a partial for Fingerprint that contains an optimized regex matcher
- * it also has the useful property that an bug in the pattern becomes a compile error instead of
- * a runtime exception
-*/
 internal static partial class Fingerprint
 {
     const string RULES_VERSION = "v1";
@@ -141,14 +130,12 @@ internal static partial class Fingerprint
             .Where(l => AtPrefix().IsMatch(l))
             .Select(l => AtPrefix().Replace(l, ""))
             .Where(l => !discardedPrefixes.Any(p => l.StartsWith(p)))
-            // .Where(l => StackFrame().IsMatch(l))
             .Select(l => FileAndLine().Replace(l, ""))
             .Select(l => GeneratedCounter().Replace(l, ""))
             .Select(l => GeneratedLocalMethodCounter().Replace(l, ""))
             .Select(l => GeneratedClass().Replace(l, ""))
             .Take(TRACE_DEPTH);
 
-        // TODO, roslyn simplified lines.ToArray() to this, learn more
         return [.. lines];
     }
 

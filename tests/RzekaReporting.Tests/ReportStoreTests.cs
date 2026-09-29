@@ -1,3 +1,4 @@
+using RzekaReporting.Functions.Database.Entities;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using RzekaReporting.Functions.Database;

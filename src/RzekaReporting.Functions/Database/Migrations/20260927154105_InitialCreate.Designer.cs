@@ -25,7 +25,7 @@ namespace RzekaReporting.Functions.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RzekaReporting.Functions.Database.CrashReport", b =>
+            modelBuilder.Entity("RzekaReporting.Functions.Database.Entities.CrashReport", b =>
                 {
                     b.Property<Guid>("ReportId")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace RzekaReporting.Functions.Database.Migrations
                     b.ToTable("CrashReports");
                 });
 
-            modelBuilder.Entity("RzekaReporting.Functions.Database.Issue", b =>
+            modelBuilder.Entity("RzekaReporting.Functions.Database.Entities.Issue", b =>
                 {
                     b.Property<string>("Fingerprint")
                         .HasMaxLength(64)
@@ -96,9 +96,9 @@ namespace RzekaReporting.Functions.Database.Migrations
                     b.ToTable("Issues");
                 });
 
-            modelBuilder.Entity("RzekaReporting.Functions.Database.CrashReport", b =>
+            modelBuilder.Entity("RzekaReporting.Functions.Database.Entities.CrashReport", b =>
                 {
-                    b.HasOne("RzekaReporting.Functions.Database.Issue", "Issue")
+                    b.HasOne("RzekaReporting.Functions.Database.Entities.Issue", "Issue")
                         .WithMany("Reports")
                         .HasForeignKey("Fingerprint")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -107,7 +107,7 @@ namespace RzekaReporting.Functions.Database.Migrations
                     b.Navigation("Issue");
                 });
 
-            modelBuilder.Entity("RzekaReporting.Functions.Database.Issue", b =>
+            modelBuilder.Entity("RzekaReporting.Functions.Database.Entities.Issue", b =>
                 {
                     b.Navigation("Reports");
                 });
